@@ -9,14 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      image: mysql:8.0
-      env: 
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: my_database
+      mysql:
+      	image: mysql:8.0
+      	env: 
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: my_database
        
-      ports:
-        - 3306:3306
-      options: --health-cmd="mysqladmin ping --silent" --health-timeout=5s --health-start-period=10s --health-retries=3
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping --silent" --health-timeout=5s --health-start-period=10s --health-retries=3
 
     steps:
     - name: checkout the repository
