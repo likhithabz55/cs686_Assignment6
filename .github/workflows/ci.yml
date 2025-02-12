@@ -1,0 +1,37 @@
+name: Build and Test Application
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      image: mysql:8.0
+      env: 
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: my_database
+       
+      ports:
+        - 3306:3306
+      options: --health-cmd="mysqladmin ping --silent" --health-timeout=5s --health-start-period=10s --health-retries=3
+
+    steps:
+    - name: checkout the repository
+      uses: actions/checkout@v2
+    - name: Set up JDK 21
+      uses: actions/setup-java@v2
+      with:
+        java-version: '21'
+        distribution: 'adoptopenjdk'
+    - name: Run Micronaut tests
+      run: ./gradlew clean test
+    - name: Build with Gradle
+      run: ./gradlew build
+    - name: Upload JAR file as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: micronaut-app-jar
+        path: build/libs/*.jar   
