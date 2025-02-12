@@ -28,6 +28,7 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: 'gradle'
+
     - name: Run Micronaut tests
       run: ./gradlew clean test
     - name: Build with Gradle
