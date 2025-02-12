@@ -26,7 +26,6 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '21'
-        distribution: 'adoptopenjdk'
     - name: Run Micronaut tests
       run: ./gradlew clean test
     - name: Build with Gradle
