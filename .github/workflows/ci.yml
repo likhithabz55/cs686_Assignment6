@@ -21,9 +21,9 @@ jobs:
 
     steps:
     - name: checkout the repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Set up JDK 21
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'adoptopenjdk'
@@ -32,7 +32,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Upload JAR file as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: micronaut-app-jar
         path: build/libs/*.jar   
